@@ -37,7 +37,8 @@ class OidcAuthenticator implements AuthenticatorInterface, AuthenticationEntryPo
       private string $checkPath,
       private string $loginPath,
       private string $userIdentifierProperty,
-      private bool $enableRememberMe)
+      private bool $enableRememberMe,
+      private bool $verifyNonce)
   {
   }
 
@@ -58,7 +59,7 @@ class OidcAuthenticator implements AuthenticatorInterface, AuthenticationEntryPo
   {
     try {
       // Try to authenticate the request
-      $authData = $this->oidcClient->authenticate($request);
+      $authData = $this->oidcClient->authenticate($request, $this->verifyNonce);
 
       // Retrieve the user data with the authentication data
       $userData = $this->oidcClient->retrieveUserInfo($authData);

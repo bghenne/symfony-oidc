@@ -21,7 +21,7 @@ interface OidcClientInterface
    *
    * @throws OidcException
    */
-  public function authenticate(Request $request): OidcTokens;
+  public function authenticate(Request $request, bool $verifyNonce = true): OidcTokens;
 
   /**
    * Use an existing refresh token to retrieve new tokens from the OIDC provider.

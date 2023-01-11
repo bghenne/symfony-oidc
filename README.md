@@ -112,6 +112,7 @@ There are a couple of options available for the `oidc` listener.
 | `client`                         | `default`       | The configured OIDC client to use                                                                                                             |
 | `user_identifier_property`       | `sub`           | The OidcUserData property to use as unique user identifier                                                                                    |
 | `enable_remember_me`             | `false`         | Enable "remember me" functionality for authenticator                                                                                          |
+| `verify_nonce`                   | `true`          | Enable the nonce parameter verification inside JWT claims                                                                                     |
 | `enable_end_session_listener`    | `false`         | Enable "logout" functionality for authenticator through the "LogoutEvent"                                                                     |
 | `use_logout_target_path`         | `true`          | Used for the end session event subscriber                                                                                                     |
 | `always_use_default_target_path` | `false`         | Used for the success handler                                                                                                                  |

@@ -28,6 +28,7 @@ class OidcFactory extends AbstractFactory implements AuthenticatorFactoryInterfa
     $this->addOption('enable_remember_me', false);
     $this->addOption('enable_end_session_listener', false);
     $this->addOption('use_logout_target_path', true);
+    $this->addOption('verify_nonce', true);
   }
 
   public function getPriority(): int
@@ -60,7 +61,8 @@ class OidcFactory extends AbstractFactory implements AuthenticatorFactoryInterfa
         ->addArgument($config['check_path'])
         ->addArgument($config['login_path'])
         ->addArgument($config['user_identifier_property'])
-        ->addArgument($config['enable_remember_me']);
+        ->addArgument($config['enable_remember_me'])
+        ->addArgument($config['verify_nonce']);
 
     $logoutListenerId = sprintf('security.logout.listener.default.%s', $firewallName);
 

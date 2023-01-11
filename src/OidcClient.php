@@ -67,7 +67,7 @@ class OidcClient implements OidcClientInterface
   }
 
   /** {@inheritDoc} */
-  public function authenticate(Request $request): OidcTokens
+  public function authenticate(Request $request, bool $verifyNonce = true): OidcTokens
   {
     // Check whether the request has an error state
     if ($request->request->has('error')) {
@@ -94,12 +94,13 @@ class OidcClient implements OidcClientInterface
 
     // Request and verify the tokens
     return $this->verifyTokens(
-        $this->requestTokens('authorization_code', $code, $this->getRedirectUrl())
+        $this->requestTokens('authorization_code', $code, $this->getRedirectUrl()),
+        $verifyNonce
     );
   }
 
   /** {@inheritDoc} */
-  public function refreshTokens(string $refreshToken): OidcTokens
+  public function refreshTokens(string $refreshToken, bool $verifyNonce = false): OidcTokens
   {
     // Clear session after check
     $this->sessionStorage->clearState();
@@ -107,7 +108,7 @@ class OidcClient implements OidcClientInterface
     // Request and verify the tokens
     return $this->verifyTokens(
         $this->requestTokens('refresh_token', null, null, $refreshToken),
-        verifyNonce: false
+        $verifyNonce
     );
   }
 
